@@ -4,26 +4,29 @@ LOG_DIR="/home/odys/Linux-Learning/Logs"
 APP_LOG_FILE="application.log"
 SYS_LOG_FILE="system.log"
 
-echo "analyzing log files"
+ERROR_PATTERNS=("ERROR" "FATAL" "CRITICAL")
+
+echo "Analyzing log files"
 echo "==================="
 
 echo -e "\nList of log files updated in last 24 hours"
-find . -name "*.log" -mtime -1
+LOG_FILES=$(find . -name "*.log" -mtime -1)
+echo "$LOG_FILES"
 
-echo -e "\nSearching ERROR logs in application.log file"
-grep "ERROR" "$LOG_DIR/$APP_LOG_FILE"
+echo -e "\nSearching ${ERROR_PATTERNS[0]} logs in application.log file"
+grep "${ERROR_PATTERNS[0]}" "$LOG_DIR/$APP_LOG_FILE"
 
-echo -e "\nNumber of ERROR logs found in application.log" 
-grep -c "ERROR" "$LOG_DIR/$APP_LOG_FILE"
+echo -e "\nNumber of ${ERROR_PATTERNS[0]} logs found in application.log" 
+grep -c "${ERROR_PATTERNS[0]}" "$LOG_DIR/$APP_LOG_FILE"
 
-echo -e "\nNumber of FATAL logs found in application.log"
-grep -c "FATAL" "$LOG_DIR/$APP_LOG_FILE"
+echo -e "\nNumber of ${ERROR_PATTERNS[1]} logs found in application.log"
+grep -c "${ERROR_PATTERNS[1]}" "$LOG_DIR/$APP_LOG_FILE"
 
-echo -e "\nNumber of FATAL logs found in system.log"
-grep -c "FATAL" "$LOG_DIR/$SYS_LOG_FILE"
+echo -e "\nNumber of ${ERROR_PATTERNS[1]} logs found in system.log"
+grep -c "${ERROR_PATTERNS[1]}" "$LOG_DIR/$SYS_LOG_FILE"
 
-echo -e "\nNumber of CRITICAL logs found in system.log"
-grep -c "CRITICAL" "$LOG_DIR/$SYS_LOG_FILE"
+echo -e "\nNumber of ${ERROR_PATTERNS[2]} logs found in system.log"
+grep -c "${ERROR_PATTERNS[2]}" "$LOG_DIR/$SYS_LOG_FILE"
 
-echo -e "\nCRITICAL log files in system.log file"
-grep "CRITICAL" "$LOG_DIR/$SYS_LOG_FILE"
+echo -e "\n${ERROR_PATTERNS[2]} log files in system.log file"
+grep "${ERROR_PATTERNS[2]}" "$LOG_DIR/$SYS_LOG_FILE"
