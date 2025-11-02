@@ -20,3 +20,13 @@
         - `screen -r loadgen`
         - `exit` 
         - To kill from outside: `screen -X -S loadgen quit`
+
+### Monitoring Cheatsheet
+- `htop`: top with process tree, sorting and kill options, press p to sort by CPU
+- `iostat`: Disk I/O stats, find disk bottlenecks
+- `vmstat`: Virtual memory, CPU, I/O stats
+- `sar`: System Activity Reporter, historical system activity
+    - `sar -u 1`: Live CPU
+    - `sar -d 1`: Live Disk
+    - `sar -r 1`: Live Memory
+
